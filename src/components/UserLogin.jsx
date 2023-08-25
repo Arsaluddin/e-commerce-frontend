@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function LoginForm() {
-  const history = useHistory();
+  const history = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,14 +12,13 @@ function LoginForm() {
 
     try {
       const response = await axios.post('/users/login', { email, password });
-      // Assuming the API returns a JWT token
       const token = response.data.token;
 
       // Store the token in an HttpOnly cookie
       document.cookie = `jwtToken=${token}; path=/`;
 
       // Redirect to a protected route or another page
-      history.push('/dashboard'); // Replace with your route
+      history('/dashboard'); // Replace with your route
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error);

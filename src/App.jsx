@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-// import Products from './pages/Products';
+import CategoriesPage from './pages/CategoryPage';
+import Products from './pages/ProductPage';
 // import ProductDetails from './pages/ProductDetails';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
+import Login from './pages/LoginPage';
+import Register from './pages/RegisterPage';
 // import Cart from './pages/Cart';
 // import Orders from './pages/Orders';
 // import NotFound from './pages/NotFound';
@@ -18,10 +19,11 @@ function App() {
     <Navbar />
       <Routes>
         <Route path='/' element={<Home/>}/>
-        {/* <Route exact path="/products" component={Products} /> */}
+        <Route path='/categories' element={<CategoriesPage/>} />
+        <Route path="/products" element={<Products/>} />
         {/* <Route path="/products/:productId" component={ProductDetails} /> */}
-        {/* <Route path="/login" component={Login} /> */}
-        {/* <Route path="/register" component={Register} /> */}
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
         {/* <Route path="/cart" component={Cart} /> */}
         {/* <Route path="/orders" component={Orders} /> */}
         {/* <Route component={NotFound} /> */}
