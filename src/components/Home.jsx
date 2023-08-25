@@ -1,6 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import Footer from './Footer';
 import ProductCard from './ProductCard';
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
+
 
 
 const exampleProducts = [
@@ -23,6 +27,8 @@ const exampleProducts = [
 const Home = () => {
     // Example category data
     const exampleCategories = ['Electronics', 'Clothing', 'Home Appliances', 'Beauty', 'Books'];
+    const [selectedCategory, setSelectedCategory] = useState('');
+
   
   
     const handleSearch = (searchTerm) => {
@@ -87,17 +93,18 @@ const Home = () => {
   
         {/* Category section */}
         <section className="bg-gray-100 py-10">
-        <div className="container mx-auto">
+         <div className="p-4">
           <h2 className="text-2xl font-semibold mb-4">Categories</h2>
-          <div className="flex justify-center space-x-4">
-            {exampleCategories.map((category) => (
-              <div key={category} className="px-4 py-2 bg-white rounded-md shadow-md cursor-pointer">
-                {category}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <CategoryList onSelectCategory={setSelectedCategory} />
+
+          <h2 className="text-2xl font-semibold mt-8">Products</h2>
+          {selectedCategory ? (
+          <ProductList categoryId={selectedCategory} />
+           ) : (
+           <p>Please select a category to view products.</p>
+          )}
+         </div>   
+        </section>
         {/* ... Rest of the code ... */}
   
         <Footer />

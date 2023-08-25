@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from 'react';
+// src/components/CategoryList.js
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function CategoryList() {
-  const [categories, setCategories] = useState([]);
+
+
+const sampleCategories = [
+  { _id: '1', name: 'Electronics' },
+  { _id: '2', name: 'Clothing' },
+  { _id: '3', name: 'Home & Kitchen' },
+  // Add more sample categories as needed
+];
+
+function CategoryList({ onSelectCategory }) {
+  const [categories, setCategories] = useState(sampleCategories);
 
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await axios.get('/categories');
-        setCategories(response.data);
+        const response = await axios.get('http://localhost:5000/categories');
+        // setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -18,19 +28,16 @@ function CategoryList() {
   }, []);
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">Categories</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {categories.map((category) => (
-          <div
-            key={category._id}
-            className="bg-white p-4 shadow-md rounded-md cursor-pointer hover:bg-gray-100"
-          >
-            <h3 className="text-lg font-semibold">{category.name}</h3>
-            <p>{category.description}</p>
-          </div>
-        ))}
-      </div>
+    <div className="flex space-x-4">
+      {categories.map(category => (
+        <div
+          key={category._id}
+          className="cursor-pointer p-2 border rounded-md hover:bg-gray-100"
+          onClick={() => onSelectCategory(category._id)}
+        >
+          {category.name}
+        </div>
+      ))}
     </div>
   );
 }
