@@ -11,14 +11,14 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/users/login', { email, password });
+      const response = await axios.post('http://localhost:5000/users/login', { email, password });
       const token = response.data.token;
 
       // Store the token in an HttpOnly cookie
       document.cookie = `jwtToken=${token}; path=/`;
 
       // Redirect to a protected route or another page
-      history('/dashboard'); // Replace with your route
+      history('/'); // Replace with your route
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error);

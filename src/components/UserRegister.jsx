@@ -13,14 +13,14 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/users/register', { username, email, password });
+      const response = await axios.post('http://localhost:5000/users/register', { username, email, password });
       const token = response.data.token;
 
       // Store token in local storage
       localStorage.setItem('token', token);
 
       // Redirect to a protected route or another page
-      history('/dashboard'); // Replace with your route
+      history('/'); // Replace with your route
     } catch (error) {
       setError('Registration failed. Please try again.');
     }
